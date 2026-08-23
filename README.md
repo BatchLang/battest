@@ -4,7 +4,6 @@ Runtime test runner for Windows batch files (`.bat` / `.cmd`). battest launches
 real `cmd.exe` and asserts on exit code, stdout, stderr, environment, filesystem
 side effects, and calls to mocked external commands.
 
-[![PyPI](https://img.shields.io/pypi/v/battest.svg)](https://pypi.org/project/battest/)
 [![Python versions](https://img.shields.io/pypi/pyversions/battest.svg)](https://pypi.org/project/battest/)
 [![CI](https://github.com/tboy1337/battest/actions/workflows/CI.yml/badge.svg)](https://github.com/tboy1337/battest/actions/workflows/CI.yml)
 [![License](https://img.shields.io/pypi/l/battest.svg)](COPYING)
