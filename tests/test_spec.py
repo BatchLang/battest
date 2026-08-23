@@ -14,7 +14,6 @@ from battest.spec import (
     _string_list_set,
     load_catalog,
     packaged_data_path,
-    spec_exec_corpus_path,
 )
 
 
@@ -38,12 +37,6 @@ def test_invalid_tilde_forms() -> None:
     assert catalog.invalid_tilde_forms("%~*")
     assert catalog.invalid_tilde_forms("%~dpnx0") == []
     assert catalog.invalid_tilde_forms("%~1") == []
-
-
-def test_spec_exec_present_when_created(tmp_path: Path) -> None:
-    corpus = tmp_path / "vendor" / "batch-spec" / "corpus" / "exec"
-    corpus.mkdir(parents=True)
-    assert spec_exec_corpus_path(tmp_path) == corpus
 
 
 def test_catalog_helpers_and_packaged_fallback(

@@ -14,7 +14,6 @@ from battest.schema import (
     load_cases_from_path,
     relative_case_id,
 )
-from battest.spec import spec_exec_corpus_path
 
 LOGGER = get_logger("discover")
 
@@ -104,21 +103,9 @@ def _ensure_unique_case_ids(cases: list[Case]) -> None:
         seen[case.case_id] = case.source_path
 
 
-def discover_cases(
-    root: Path,
-    *,
-    include_spec_exec: bool = False,
-    repo_root: Path | None = None,
-) -> list[Case]:
-    """Load every fixture under root, optionally including batch-spec corpus/exec."""
+def discover_cases(root: Path) -> list[Case]:
+    """Load every fixture under root."""
     cases = _cases_from_root(root)
-    if include_spec_exec:
-        corpus = spec_exec_corpus_path(repo_root)
-        if corpus is not None and corpus.resolve() != root.resolve():
-            LOGGER.info("including spec exec corpus %s", corpus)
-            cases.extend(_cases_from_root(corpus))
-        else:
-            LOGGER.info("spec exec corpus absent or already included")
     _ensure_unique_case_ids(cases)
     LOGGER.info("total cases discovered: %s", len(cases))
     return cases

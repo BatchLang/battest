@@ -281,7 +281,7 @@ def test_main_execute_engine_error(
         raise EngineError("cannot exec")
 
     monkeypatch.setattr("battest.cli.execute_cases", boom)
-    assert main(["run", str(tmp_path), "--verbose", "--include-spec-exec"]) == 2
+    assert main(["run", str(tmp_path), "--verbose"]) == 2
 
 
 def test_main_junit_oserror(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
@@ -384,19 +384,6 @@ def test_load_case_file_and_dir(tmp_path: Path) -> None:
     assert len(from_file) == 1
     assert len(from_dir) == 1
     assert from_file[0].description == "ok"
-
-
-def test_load_case_include_spec_exec_when_absent(tmp_path: Path) -> None:
-    script = tmp_path / "input.cmd"
-    script.write_text("@echo off\n", encoding="utf-8")
-    manifest = tmp_path / "ok.battest.yaml"
-    manifest.write_text(
-        "description: ok\nscript: input.cmd\nexpect:\n  exit_code: 0\n",
-        encoding="utf-8",
-    )
-    cases = load_case(tmp_path, include_spec_exec=True)
-    assert len(cases) == 1
-    assert cases[0].description == "ok"
 
 
 def test_load_case_logs(tmp_path: Path, caplog: pytest.LogCaptureFixture) -> None:

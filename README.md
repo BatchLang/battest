@@ -1,8 +1,13 @@
 # battest
 
 Runtime test runner for Windows batch files (`.bat` / `.cmd`). battest launches
-real `cmd.exe`, then asserts on exit code, stdout, stderr, environment, and
-filesystem side effects.
+real `cmd.exe` and asserts on exit code, stdout, stderr, environment, filesystem
+side effects, and calls to mocked external commands.
+
+[![PyPI](https://img.shields.io/pypi/v/battest.svg)](https://pypi.org/project/battest/)
+[![Python versions](https://img.shields.io/pypi/pyversions/battest.svg)](https://pypi.org/project/battest/)
+[![CI](https://github.com/tboy1337/battest/actions/workflows/CI.yml/badge.svg)](https://github.com/tboy1337/battest/actions/workflows/CI.yml)
+[![License](https://img.shields.io/pypi/l/battest.svg)](COPYING)
 
 It is a **trusted-fixture runner**, not a sandbox. Destructive scripts can still
 harm the host. Use `--safe-defaults` (or the GitHub Action, which enables it)
@@ -10,11 +15,22 @@ and a disposable VM or CI runner for untrusted suites. Details:
 [Safety](docs/safety.md).
 
 battest is a sibling of [Blinter](https://github.com/tboy1337/Blinter) (static
-analysis) and [batch-spec](https://github.com/tboy1337/batch-spec) (language
-spec). It does not depend on Blinter.
+analysis). It does not depend on Blinter.
 
-**Requirements:** Python 3.11+ and Windows for `battest run`. License:
-AGPL-3.0-or-later ([COPYING](COPYING)).
+**Requirements:** Python 3.11+ and Windows for `battest run`.
+
+## Features
+
+- Real `cmd.exe` in an isolated temp workdir per case (Job Object, kill-on-close)
+- Assertions: exit code, stdout/stderr, environment, and files
+- PATH mocks for external commands (`ipconfig`, `reg`, …) with call recording
+- Param overlays: one YAML document, many variants
+- `setup` / `teardown`, stdin, env, and copy-in fixtures
+- Parallel `--jobs`, JUnit XML, and a Windows GitHub Action
+- Optional `--safe-defaults` PATH stubs for common destructive utilities
+
+cmd.exe internals (`del`, `copy`, `rd`, …) cannot be shadowed via `PATH`. See
+[Mocking](docs/mocking.md).
 
 ## Quick start
 
@@ -50,7 +66,7 @@ battest run hello.battest.yaml
 `python -m battest` is the same as `battest`. A passing case prints `PASS`. A
 failing case prints a diff and exits `1`. Invalid YAML or usage exits `2`.
 
-Case-directory form (batch-spec corpus layout) is equivalent:
+Case-directory form is equivalent:
 
 ```text
 tests/hello/input.cmd
@@ -58,12 +74,74 @@ tests/hello/expect.yaml
 ```
 
 Then `battest run tests`. From this repository, `battest run examples` runs the
-bundled fixtures.
+bundled fixtures, including a mocked `ipconfig /flushdns` script with param
+overlays.
 
 CLI `--safe-defaults` is **off**. The GitHub Action turns it **on**. That flag
 PATH-stubs common destructive externals (`format`, `shutdown`, `reg`, and
 others); it does not isolate the filesystem. See [CLI](docs/cli.md) and
 [Mocking](docs/mocking.md).
+
+### Mocking externals
+
+PATH stubs replace named executables for the case. This fixture asserts
+`ipconfig /flushdns` is invoked, then overlays a non-admin variant:
+
+```yaml
+description: flush DNS when admin
+script: flush_dns.cmd
+timeout_seconds: 15
+mocks:
+  net:
+    exit_code: 0
+  ipconfig:
+    exit_code: 0
+    expect_calls:
+      - args_contains: "/flushdns"
+  timeout:
+    exit_code: 0
+expect:
+  exit_code: 0
+  stdout:
+    contains: Flushing DNS cache
+params:
+  - id: not-admin
+    mocks:
+      net:
+        exit_code: 2
+      ipconfig:
+        expect_calls:
+          - not_called: true
+      timeout:
+        exit_code: 0
+    expect:
+      exit_code: 1
+      stdout:
+        contains: administrator
+```
+
+Full field list: [Fixture format](docs/fixture-format.md). Bundled example:
+[`examples/windowsrescue/`](examples/windowsrescue/).
+
+## CLI
+
+```text
+battest [--version] run [path] [--junit-xml FILE] [--jobs N]
+        [--timeout SECONDS] [--max-diff N] [--safe-defaults]
+        [--no-safe-defaults] [-v]
+```
+
+| Flag | Meaning |
+|---|---|
+| `path` | Fixture file or directory. Default: `./tests` when it contains battest fixtures, otherwise the current directory |
+| `--jobs` | Parallel case execution (each case has its own temp dir). 1–256 |
+| `--timeout` | Default timeout when a case omits `timeout_seconds`. Default: `30` |
+| `--junit-xml` | Write xunit2 JUnit XML |
+| `--safe-defaults` | PATH-stub common destructive externals unless mocked or listed in `allow` |
+| `-v` | Debug logging to stderr |
+
+Exit codes: `0` all passed, `1` one or more FAIL/ERROR/TIMEOUT, `2` usage or
+schema error. Full flag list: [CLI](docs/cli.md).
 
 ## GitHub Action
 
@@ -97,10 +175,6 @@ Inputs, outputs, and `--` before `path` are documented in
 ```text
 pip install battest
 ```
-
-Wheels on PyPI are published from the GitHub `pypi` environment with
-`twine upload` and the project-scoped `PYPI_BATTEST` secret.
-See [Security](docs/SECURITY.md).
 
 ### Standalone executable (no Python)
 
@@ -153,12 +227,6 @@ results = run_cases(cases, jobs=1, safe_defaults=False)
 `run_case` / `run_cases` require Windows `cmd.exe`. `safe_defaults` defaults to
 off, matching the CLI. Full notes: [CLI](docs/cli.md).
 
-## Development
-
-Clone this repository and run `python scripts/verify.py` (format, types, lint,
-pytest, and the PATH-mock stub checks). Stub build details:
-[PATH mock stub crate](docs/stub.md).
-
 ## Documentation
 
 Getting started:
@@ -175,3 +243,7 @@ Behavior:
 - [Safety](docs/safety.md)
 - [Security](docs/SECURITY.md)
 - [Changelog](docs/CHANGELOG.md)
+
+## License
+
+AGPL-3.0-or-later ([COPYING](COPYING)).

@@ -39,17 +39,15 @@ def _engine_config(
         raise EngineError(str(exc)) from exc
 
 
-def load_case(path: str | Path, *, include_spec_exec: bool = False) -> list[Case]:
+def load_case(path: str | Path) -> list[Case]:
     """Load and expand cases from a fixture file or discovery root."""
     resolved = Path(path).resolve()
-    LOGGER.info(
-        "api load_case path=%s include_spec_exec=%s", resolved, include_spec_exec
-    )
+    LOGGER.info("api load_case path=%s", resolved)
     if resolved.is_file():
         loaded = load_cases_from_path(resolved)
         LOGGER.info("api load_case file=%s cases=%s", resolved, len(loaded))
         return loaded
-    loaded = discover_cases(resolved, include_spec_exec=include_spec_exec)
+    loaded = discover_cases(resolved)
     LOGGER.info("api load_case dir=%s cases=%s", resolved, len(loaded))
     return loaded
 

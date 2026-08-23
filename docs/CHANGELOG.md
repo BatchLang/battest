@@ -5,6 +5,14 @@ All notable changes to battest are documented in this file. Release tags follow
 
 ## [Unreleased]
 
+## [1.0.10] - 2026-08-23
+
+README rewrite and unused spec-exec discovery removal.
+
+- Rewrote the README around install, fixtures, mocking, CLI, and the GitHub Action.
+- Removed unused CLI `--include-spec-exec` and `load_case(..., include_spec_exec=...)`.
+  Discovery no longer opts into `vendor/batch-spec/corpus/exec`.
+
 ## [1.0.9] - 2026-08-20
 
 GitHub Action Marketplace listing and installer-test hygiene.
@@ -220,6 +228,7 @@ Rust stub helper.
 - CI and `scripts/verify.py` lint first-party batch scripts with Blinter
   (`scripts/blinter.ini` for installers; default rules for `examples/`).
 
+[1.0.10]: https://github.com/tboy1337/battest/releases/tag/v1.0.10
 [1.0.9]: https://github.com/tboy1337/battest/releases/tag/v1.0.9
 [1.0.8]: https://github.com/tboy1337/battest/releases/tag/v1.0.8
 [1.0.7]: https://github.com/tboy1337/battest/releases/tag/v1.0.7

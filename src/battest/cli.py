@@ -82,13 +82,6 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_false",
     )
     run_parser.add_argument(
-        "--include-spec-exec",
-        dest="include_spec_exec",
-        action="store_true",
-        default=False,
-        help="also discover vendor/batch-spec/corpus/exec when present",
-    )
-    run_parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
@@ -145,7 +138,7 @@ def _run_command(args: argparse.Namespace) -> int:
     if invalid is not None:
         return _usage_failure(args, invalid)
     try:
-        cases = discover_cases(root, include_spec_exec=args.include_spec_exec)
+        cases = discover_cases(root)
     except SchemaError as exc:
         return _usage_failure(args, str(exc))
     if not cases:

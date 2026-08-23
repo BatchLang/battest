@@ -9,7 +9,6 @@ import pytest
 
 from battest.discover import default_root, discover_cases, iter_fixture_files
 from battest.schema import SchemaError
-from battest.spec import spec_exec_corpus_path
 
 
 def test_iter_fixture_files_finds_manifest_and_case_dir(tmp_path: Path) -> None:
@@ -133,32 +132,6 @@ def test_default_root_falls_back_when_tests_scan_fails(
 
     monkeypatch.setattr("battest.discover.iter_fixture_files", boom)
     assert default_root() == tmp_path
-
-
-def test_include_spec_exec_when_absent(tmp_path: Path) -> None:
-    (tmp_path / "input.cmd").write_text("@echo off\n", encoding="utf-8")
-    (tmp_path / "solo.battest.yaml").write_text(
-        "description: solo\nscript: input.cmd\nexpect:\n  exit_code: 0\n",
-        encoding="utf-8",
-    )
-    cases = discover_cases(tmp_path, include_spec_exec=True, repo_root=tmp_path)
-    assert len(cases) == 1
-
-
-def test_include_spec_exec_discovers_corpus(tmp_path: Path) -> None:
-    corpus = tmp_path / "vendor" / "batch-spec" / "corpus" / "exec" / "sample"
-    corpus.mkdir(parents=True)
-    (corpus / "input.cmd").write_text("@echo off\n", encoding="utf-8")
-    (corpus / "expect.yaml").write_text(
-        "description: corpus-exec\nexpect:\n  exit_code: 0\n",
-        encoding="utf-8",
-    )
-    cases = discover_cases(tmp_path, include_spec_exec=True, repo_root=tmp_path)
-    assert [item.description for item in cases] == ["corpus-exec"]
-
-
-def test_spec_exec_corpus_path_none_for_empty_root(tmp_path: Path) -> None:
-    assert spec_exec_corpus_path(tmp_path) is None
 
 
 def test_iter_fixture_files_missing(tmp_path: Path) -> None:

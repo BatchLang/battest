@@ -172,21 +172,3 @@ def load_catalog() -> SpecCatalog:
         len(catalog.deprecated_commands),
     )
     return catalog
-
-
-def spec_exec_corpus_path(repo_root: Path | None = None) -> Path | None:
-    """Return batch-spec corpus/exec if present, else None."""
-    roots: list[Path] = []
-    if repo_root is not None:
-        roots.append(repo_root)
-    roots.append(Path.cwd())
-    package_root = Path(__file__).resolve().parent.parent.parent
-    roots.append(package_root)
-    for root in roots:
-        candidate = root / "vendor" / "batch-spec" / "corpus" / "exec"
-        LOGGER.debug("checking spec exec corpus at %s", candidate)
-        if candidate.is_dir():
-            LOGGER.info("found spec exec corpus at %s", candidate)
-            return candidate
-    LOGGER.info("spec exec corpus not present; skipping")
-    return None

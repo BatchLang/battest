@@ -3,7 +3,7 @@
 ```text
 battest [--version] run [path] [--junit-xml FILE] [--jobs N]
         [--timeout SECONDS] [--max-diff N] [--safe-defaults]
-        [--no-safe-defaults] [--include-spec-exec] [-v]
+        [--no-safe-defaults] [-v]
 ```
 
 | Flag | Meaning |
@@ -16,7 +16,6 @@ battest [--version] run [path] [--junit-xml FILE] [--jobs N]
 | `--max-diff` | Truncate failure diffs and captured expected/actual text to this many characters. Must be >= 1. Default: `2000` |
 | `--safe-defaults` | PATH-stub `format`, `shutdown`, `reg`, `diskpart`, `bcdedit`, `cipher`, `netsh`, `takeown`, `wmic` unless mocked or listed in `allow` |
 | `--no-safe-defaults` | Disable those automatic stubs (CLI default) |
-| `--include-spec-exec` | Also discover `vendor/batch-spec/corpus/exec` when that folder exists. The current batch-spec pin does not ship `corpus/exec`, so this flag is a no-op until that corpus is present |
 | `-v` | Debug logging to stderr during `battest run`. INFO logs go to stderr after the CLI configures logging; `-v` switches to DEBUG. Library callers keep a NullHandler until they configure logging |
 
 Exit codes: `0` all passed, `1` one or more FAIL/ERROR/TIMEOUT, `2` usage or
@@ -35,7 +34,6 @@ results = run_cases(cases, jobs=1, safe_defaults=False)
 ```
 
 `load_case` returns one or more resolved cases (param overlays expand).
-Directory roots accept `include_spec_exec=True`, matching `--include-spec-exec`.
 `run_case` / `run_cases` require Windows `cmd.exe`. `safe_defaults` defaults
 to off, matching the CLI.
 
