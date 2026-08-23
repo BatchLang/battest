@@ -764,7 +764,7 @@ def test_ci_release_jobs_are_atomic() -> None:
         if isinstance(step, dict) and step.get("name")
     ]
     assert "Download Windows build" in download_names
-    assert "Download Python dist" in download_names
+    assert "Download Python dist" not in download_names
     assert "Move major version tag" in download_names
     move_major = next(
         step
@@ -785,7 +785,7 @@ def test_ci_release_jobs_are_atomic() -> None:
     )
     artifacts = str(release.get("with", {}).get("artifacts", ""))
     assert "Battest-v${{ needs.check-version.outputs.version }}.zip" in artifacts
-    assert "./python-dist/*" in artifacts
+    assert "python-dist" not in artifacts
     assert "github.event.inputs.force == 'true'" in str(
         release.get("with", {}).get("allowUpdates")
     )

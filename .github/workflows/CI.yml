@@ -651,12 +651,6 @@ jobs:
           name: windows-build
           path: ./build
 
-      - name: Download Python dist
-        uses: actions/download-artifact@v8
-        with:
-          name: python-dist
-          path: ./python-dist
-
       - name: Extract release notes
         id: release_notes
         run: |
@@ -667,7 +661,7 @@ jobs:
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ./build/Battest-v${{ needs.check-version.outputs.version }}.zip,./python-dist/*
+          artifacts: ./build/Battest-v${{ needs.check-version.outputs.version }}.zip
           tag: v${{ needs.check-version.outputs.version }}
           bodyFile: ${{ steps.release_notes.outputs.path }}
           token: ${{ secrets.GITHUB_TOKEN }}

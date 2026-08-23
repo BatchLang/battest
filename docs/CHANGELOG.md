@@ -5,6 +5,13 @@ All notable changes to battest are documented in this file. Release tags follow
 
 ## [Unreleased]
 
+## [1.0.11] - 2026-08-23
+
+GitHub Releases no longer attach Python wheels.
+
+- GitHub Releases attach only the Windows zip. Wheels and sdists still publish
+  to PyPI.
+
 ## [1.0.10] - 2026-08-23
 
 README rewrite and unused spec-exec discovery removal.
@@ -228,6 +235,7 @@ Rust stub helper.
 - CI and `scripts/verify.py` lint first-party batch scripts with Blinter
   (`scripts/blinter.ini` for installers; default rules for `examples/`).
 
+[1.0.11]: https://github.com/tboy1337/battest/releases/tag/v1.0.11
 [1.0.10]: https://github.com/tboy1337/battest/releases/tag/v1.0.10
 [1.0.9]: https://github.com/tboy1337/battest/releases/tag/v1.0.9
 [1.0.8]: https://github.com/tboy1337/battest/releases/tag/v1.0.8
