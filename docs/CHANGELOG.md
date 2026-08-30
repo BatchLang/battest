@@ -5,6 +5,14 @@ All notable changes to battest are documented in this file. Release tags follow
 
 ## [Unreleased]
 
+## [1.0.13] - 2026-08-31
+
+Pinned vendor batch-spec to 0.70.0.
+
+- Packaged `expansion.yaml` now includes `command_chaining.close_paren_leftover_in_block`
+  (leftover text after an unquoted `)` that closes an IF/FOR/naked group is a live
+  syntax error). Command catalogs and `%~` modifier letters are unchanged.
+
 ## [1.0.12] - 2026-08-23
 
 Removed the README PyPI version badge.
@@ -242,6 +250,7 @@ Rust stub helper.
 - CI and `scripts/verify.py` lint first-party batch scripts with Blinter
   (`scripts/blinter.ini` for installers; default rules for `examples/`).
 
+[1.0.13]: https://github.com/tboy1337/battest/releases/tag/v1.0.13
 [1.0.12]: https://github.com/tboy1337/battest/releases/tag/v1.0.12
 [1.0.11]: https://github.com/tboy1337/battest/releases/tag/v1.0.11
 [1.0.10]: https://github.com/tboy1337/battest/releases/tag/v1.0.10

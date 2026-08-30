@@ -1,4 +1,4 @@
-version: 59
+version: 60
 
 # Percent-tilde (%~) expansion rules
 # Authoritative syntax: audit/cmd-help/call-help.txt (CALL /?)
@@ -1942,6 +1942,16 @@ command_chaining:
     Parentheses group a statement list so trailing && / || observe the group's
     chaining success and resulting ERRORLEVEL. Prefer explicit groups for
     portable scripts.
+  close_paren_leftover_in_block: >-
+    Inside a parenthesized IF/FOR/naked group, an unquoted ')' closes the
+    current group even when it looks like it pairs with a same-line '('.
+    Leftover text after that closer is a live syntax error (exit 255;
+    "X was unexpected at this time"), including echo --- text (parens) ---
+    and echo (a) (b). Remainder after ')' may only be empty, another ')',
+    chaining (& && || |), redirection, ELSE, or DO. Escape as ^(...^), quote
+    the parentheses, or use REM (not ::). The same echo is valid at script
+    level, where '(' / ')' stay command text. Confirmed on live Windows
+    10/11 cmd.
   and_or_precedence: >-
     On live cmd.exe, && binds tighter than ||, so A || B && C behaves as
     A || (B && C), and A && B || C behaves as (A && B) || C. Equal-precedence
