@@ -606,17 +606,9 @@ def test_ci_dependency_graph_does_not_block_release() -> None:
     workflow = _load_ci_workflow()
     jobs = workflow["jobs"]
     assert isinstance(jobs, dict)
-    dependency_graph = jobs["dependency-graph"]
+    assert "dependency-graph" not in jobs
     check_version = jobs["check-version"]
-    assert isinstance(dependency_graph, dict)
     assert isinstance(check_version, dict)
-    assert dependency_graph.get("continue-on-error") is not True
-    submit = next(
-        step
-        for step in dependency_graph["steps"]
-        if isinstance(step, dict) and step.get("name") == "Submit dependency snapshot"
-    )
-    assert submit.get("continue-on-error") is not True
     needs = check_version["needs"]
     assert isinstance(needs, list)
     assert "dependency-graph" not in needs

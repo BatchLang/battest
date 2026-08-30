@@ -431,23 +431,6 @@ jobs:
           assert stub_executable().is_file()
           "
 
-  dependency-graph:
-    name: Dependency Graph
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - name: Submit dependency snapshot
-        uses: advanced-security/component-detection-dependency-submission-action@v0.1.4
-        with:
-          detectorArgs: Pip=EnableIfDefaultOff
-
   check-version:
     name: Check pyproject.toml version bump
     needs:

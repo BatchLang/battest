@@ -5,6 +5,12 @@ All notable changes to battest are documented in this file. Release tags follow
 
 ## [Unreleased]
 
+Removed the CI Dependency Graph snapshot job.
+
+- `advanced-security/component-detection-dependency-submission-action` hung until
+  the 15-minute job timeout and cancelled the whole workflow after a successful
+  1.0.13 release. GitHub's configured pip dependency-graph update remains.
+
 ## [1.0.13] - 2026-08-31
 
 Pinned vendor batch-spec to 0.70.0.
