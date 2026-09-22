@@ -2,7 +2,7 @@
 $tls = [Net.SecurityProtocolType]::Tls12
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor $tls
 $headers = @{ 'User-Agent' = 'battest-installer'; 'Accept' = 'application/vnd.github+json' }
-$uri = 'https://api.github.com/repos/tboy1337/battest/releases/latest'
+$uri = 'https://api.github.com/repos/BatchLang/battest/releases/latest'
 try {
     $release = Invoke-RestMethod -Uri $uri -Headers $headers
 }

@@ -1,7 +1,7 @@
 # GitHub Action
 
 The composite action lives at the repository root (`action.yml`) so consumers
-can write `uses: tboy1337/battest@v1`. That major tag moves with each `1.x.x`
+can write `uses: BatchLang/battest@v1`. That major tag moves with each `1.x.x`
 release, the same way `actions/checkout@v7` works. Pin a full `v1.Y.Z` tag
 only if you need a frozen patch. Do not pin this action to a commit SHA or to
 `main`. It must run on a **Windows** runner (`runs-on: windows-*`).
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - id: battest
-        uses: tboy1337/battest@v1
+        uses: BatchLang/battest@v1
         with:
           path: tests
           safe-defaults: "true"

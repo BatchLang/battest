@@ -4,7 +4,7 @@ requires = [ "setuptools>=77" ]
 
 [project]
 name = "battest"
-version = "1.0.13"
+version = "1.0.14"
 description = """\
   battest is a runtime test runner for Windows batch files. It executes real cmd.exe scripts and asserts on exit \
   codes, output, environment, and filesystem side effects.\
@@ -26,8 +26,8 @@ keywords = [
 ]
 license = "AGPL-3.0-or-later"
 license-files = [ "COPYING" ]
-maintainers = [ { name = "tboy1337", email = "tboy1337@proton.me" } ]
-authors = [ { name = "tboy1337", email = "tboy1337@proton.me" } ]
+maintainers = [ { name = "tboy1337", email = "BatchLang@proton.me" } ]
+authors = [ { name = "tboy1337", email = "BatchLang@proton.me" } ]
 requires-python = ">=3.11"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
@@ -66,10 +66,10 @@ optional-dependencies.dev = [
   "pytest-xdist",
   "types-pyyaml",
 ]
-urls.Documentation = "https://github.com/tboy1337/battest"
-urls.Homepage = "https://github.com/tboy1337/battest"
-urls.Issues = "https://github.com/tboy1337/battest/issues"
-urls.Repository = "https://github.com/tboy1337/battest.git"
+urls.Documentation = "https://github.com/BatchLang/battest"
+urls.Homepage = "https://github.com/BatchLang/battest"
+urls.Issues = "https://github.com/BatchLang/battest/issues"
+urls.Repository = "https://github.com/BatchLang/battest.git"
 scripts.battest = "battest.cli:main"
 
 [tool.setuptools]

@@ -11,6 +11,17 @@ Removed the CI Dependency Graph snapshot job.
   the 15-minute job timeout and cancelled the whole workflow after a successful
   1.0.13 release. GitHub's configured pip dependency-graph update remains.
 
+## [1.0.14] - 2026-09-22
+
+Canonical repository is the [BatchLang organization](https://github.com/BatchLang/battest).
+
+- Package metadata, installer, schema id, and docs use
+  `https://github.com/BatchLang/battest`. Security contact is
+  `BatchLang@proton.me`. tboy1337 remains the author and maintainer.
+- GitHub Action consumers should use `BatchLang/battest@v1`.
+- Standalone `battest.exe` reports company BatchLang.
+- The batch-spec submodule URL is `https://github.com/BatchLang/batch-spec.git`.
+
 ## [1.0.13] - 2026-08-31
 
 Pinned vendor batch-spec to 0.70.0.
@@ -256,6 +267,7 @@ Rust stub helper.
 - CI and `scripts/verify.py` lint first-party batch scripts with Blinter
   (`scripts/blinter.ini` for installers; default rules for `examples/`).
 
+[1.0.14]: https://github.com/BatchLang/battest/releases/tag/v1.0.14
 [1.0.13]: https://github.com/tboy1337/battest/releases/tag/v1.0.13
 [1.0.12]: https://github.com/tboy1337/battest/releases/tag/v1.0.12
 [1.0.11]: https://github.com/tboy1337/battest/releases/tag/v1.0.11

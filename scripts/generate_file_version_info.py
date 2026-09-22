@@ -80,7 +80,7 @@ def _build_version_info(version: str) -> str:
       [
       StringTable(
         u'040904B0',
-        [StringStruct(u'CompanyName', u'tboy1337'),
+        [StringStruct(u'CompanyName', u'BatchLang'),
         StringStruct(u'FileDescription', u'{FILE_DESCRIPTION}'),
         StringStruct(u'FileVersion', u'{version}'),
         StringStruct(u'InternalName', u'battest'),

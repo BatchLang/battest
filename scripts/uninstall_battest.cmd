@@ -5,7 +5,7 @@ REM ============================================================================
 REM battest Uninstaller
 REM Purpose: Remove battest from %LOCALAPPDATA% and user PATH
 REM Author: tboy1337
-REM Repository: https://github.com/tboy1337/battest
+REM Repository: https://github.com/BatchLang/battest
 REM ============================================================================
 
 REM Attempt to change to system drive to avoid issues with current directory/drive

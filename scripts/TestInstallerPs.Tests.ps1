@@ -62,7 +62,7 @@ Describe 'Get-LatestBattestRelease.ps1' {
                 assets     = @(
                     [PSCustomObject]@{
                         name                 = 'Battest-v0.1.0.zip'
-                        browser_download_url = 'https://github.com/tboy1337/battest/releases/download/v0.1.0/Battest-v0.1.0.zip'
+                        browser_download_url = 'https://github.com/BatchLang/battest/releases/download/v0.1.0/Battest-v0.1.0.zip'
                         digest               = 'sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
                     }
                 )
@@ -71,7 +71,7 @@ Describe 'Get-LatestBattestRelease.ps1' {
 
         $output = & $fixturePath
         $LASTEXITCODE | Should -Be 0
-        $output | Should -Be 'https://github.com/tboy1337/battest/releases/download/v0.1.0/Battest-v0.1.0.zip v0.1.0 sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+        $output | Should -Be 'https://github.com/BatchLang/battest/releases/download/v0.1.0/Battest-v0.1.0.zip v0.1.0 sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
     }
 
     It 'outputs NO_DIGEST when the asset digest is missing' {
@@ -84,7 +84,7 @@ Describe 'Get-LatestBattestRelease.ps1' {
                 assets     = @(
                     [PSCustomObject]@{
                         name                 = 'Battest-v0.1.0.zip'
-                        browser_download_url = 'https://github.com/tboy1337/battest/releases/download/v0.1.0/Battest-v0.1.0.zip'
+                        browser_download_url = 'https://github.com/BatchLang/battest/releases/download/v0.1.0/Battest-v0.1.0.zip'
                     }
                 )
             }

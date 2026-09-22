@@ -1,6 +1,6 @@
 # Security
 
-Report vulnerabilities privately to `tboy1337@proton.me`. Do not open a public
+Report vulnerabilities privately to `BatchLang@proton.me`. Do not open a public
 issue for a security report until a fix is available or the maintainer says
 otherwise.
 
@@ -22,5 +22,5 @@ They do not virtualize the filesystem, registry, or network.
 PyPI uploads run from GitHub Actions environment `pypi` with
 `twine upload` and the project-scoped `PYPI_BATTEST` secret.
 The job keeps `id-token: write` so a GitHub Trusted Publisher
-(`tboy1337/battest`, workflow `CI.yml`, environment `pypi`) can replace the
+(`BatchLang/battest`, workflow `CI.yml`, environment `pypi`) can replace the
 token later without a permission change.

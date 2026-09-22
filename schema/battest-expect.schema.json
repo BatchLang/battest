@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/tboy1337/battest/schema/battest-expect.schema.json",
+  "$id": "https://github.com/BatchLang/battest/schema/battest-expect.schema.json",
   "title": "battest fixture document",
   "type": "object",
   "required": ["description", "expect"],

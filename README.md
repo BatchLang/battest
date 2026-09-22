@@ -5,7 +5,7 @@ real `cmd.exe` and asserts on exit code, stdout, stderr, environment, filesystem
 side effects, and calls to mocked external commands.
 
 [![Python versions](https://img.shields.io/pypi/pyversions/battest.svg)](https://pypi.org/project/battest/)
-[![CI](https://github.com/tboy1337/battest/actions/workflows/CI.yml/badge.svg)](https://github.com/tboy1337/battest/actions/workflows/CI.yml)
+[![CI](https://github.com/BatchLang/battest/actions/workflows/CI.yml/badge.svg)](https://github.com/BatchLang/battest/actions/workflows/CI.yml)
 [![License](https://img.shields.io/pypi/l/battest.svg)](COPYING)
 
 It is a **trusted-fixture runner**, not a sandbox. Destructive scripts can still
@@ -13,7 +13,7 @@ harm the host. Use `--safe-defaults` (or the GitHub Action, which enables it)
 and a disposable VM or CI runner for untrusted suites. Details:
 [Safety](docs/safety.md).
 
-battest is a sibling of [Blinter](https://github.com/tboy1337/Blinter) (static
+battest is a sibling of [Blinter](https://github.com/BatchLang/Blinter) (static
 analysis). It does not depend on Blinter.
 
 **Requirements:** Python 3.11+ and Windows for `battest run`.
@@ -153,7 +153,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - id: battest
-        uses: tboy1337/battest@v1
+        uses: BatchLang/battest@v1
         with:
           path: tests
           safe-defaults: "true"
@@ -183,7 +183,7 @@ adds that directory to your user `PATH`, and returns the installer exit code
 after deleting the downloaded `.cmd`:
 
 ```text
-curl -L https://raw.githubusercontent.com/tboy1337/battest/main/scripts/install_battest.cmd -o install_battest.cmd && call install_battest.cmd & set "BATTEST_INSTALL_EXIT=%ERRORLEVEL%" & del install_battest.cmd & exit /b %BATTEST_INSTALL_EXIT%
+curl -L https://raw.githubusercontent.com/BatchLang/battest/main/scripts/install_battest.cmd -o install_battest.cmd && call install_battest.cmd & set "BATTEST_INSTALL_EXIT=%ERRORLEVEL%" & del install_battest.cmd & exit /b %BATTEST_INSTALL_EXIT%
 ```
 
 The installer always fetches the latest GitHub release and verifies the zip
@@ -195,7 +195,7 @@ known installer script. Restart the terminal or IDE after install so `PATH`
 updates are visible.
 
 **Manual zip:** download `Battest-vX.Y.Z.zip` from
-[GitHub Releases](https://github.com/tboy1337/battest/releases) and run
+[GitHub Releases](https://github.com/BatchLang/battest/releases) and run
 `Battest-vX.Y.Z\battest.exe`. Some antivirus products flag PyInstaller unpacking
 as a false positive. The source is public; pip avoids that class of heuristic.
 
@@ -204,7 +204,7 @@ as a false positive. The source is public; pip avoids that class of heuristic.
 Standalone install (cmd.exe):
 
 ```text
-curl -L https://raw.githubusercontent.com/tboy1337/battest/main/scripts/uninstall_battest.cmd -o uninstall_battest.cmd && call uninstall_battest.cmd & set "BATTEST_UNINSTALL_EXIT=%ERRORLEVEL%" & del uninstall_battest.cmd & exit /b %BATTEST_UNINSTALL_EXIT%
+curl -L https://raw.githubusercontent.com/BatchLang/battest/main/scripts/uninstall_battest.cmd -o uninstall_battest.cmd && call uninstall_battest.cmd & set "BATTEST_UNINSTALL_EXIT=%ERRORLEVEL%" & del uninstall_battest.cmd & exit /b %BATTEST_UNINSTALL_EXIT%
 ```
 
 pip:

@@ -380,17 +380,17 @@ def test_changelog_documents_current_version() -> None:
     changelog = (REPO_ROOT / "docs" / "CHANGELOG.md").read_text(encoding="utf-8")
     assert f"## [{version}]" in changelog
     assert (
-        f"[{version}]: https://github.com/tboy1337/battest/releases/tag/v{version}"
+        f"[{version}]: https://github.com/BatchLang/battest/releases/tag/v{version}"
         in changelog
     )
     action_docs = (REPO_ROOT / "docs" / "github-action.md").read_text(encoding="utf-8")
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     major = version.split(".", maxsplit=1)[0]
-    pin = f"tboy1337/battest@v{major}"
+    pin = f"BatchLang/battest@v{major}"
     assert pin in action_docs
     assert pin in readme
-    assert f"tboy1337/battest@v{version}" not in readme
-    assert f"tboy1337/battest@v{version}" not in action_docs
+    assert f"BatchLang/battest@v{version}" not in readme
+    assert f"BatchLang/battest@v{version}" not in action_docs
 
 
 def test_installer_verifies_github_asset_digest() -> None:

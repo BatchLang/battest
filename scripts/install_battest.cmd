@@ -5,7 +5,7 @@ REM ============================================================================
 REM battest Installer/Updater
 REM Purpose: Download and install the latest battest release to %LOCALAPPDATA%
 REM Author: tboy1337
-REM Repository: https://github.com/tboy1337/battest
+REM Repository: https://github.com/BatchLang/battest
 REM ============================================================================
 
 REM Attempt to change to system drive to avoid issues with current directory/drive
@@ -316,7 +316,7 @@ REM Write PowerShell script to fetch latest release URL, tag, and digest
 echo $tls = [Net.SecurityProtocolType]::Tls12
 echo [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor $tls
 echo $headers = @{ 'User-Agent' = 'battest-installer'; 'Accept' = 'application/vnd.github+json' }
-echo $uri = 'https://api.github.com/repos/tboy1337/battest/releases/latest'
+echo $uri = 'https://api.github.com/repos/BatchLang/battest/releases/latest'
 echo try {
 echo     $release = Invoke-RestMethod -Uri $uri -Headers $headers
 echo }
@@ -533,7 +533,7 @@ echo +========================================================+
 echo + Installation failed. Please review the errors above. +
 echo +========================================================+
 echo.
-echo For help, visit: https://github.com/tboy1337/battest/issues
+echo For help, visit: https://github.com/BatchLang/battest/issues
 echo.
 timeout /t 5 /nobreak
 endlocal
