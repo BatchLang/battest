@@ -3,14 +3,6 @@
 All notable changes to battest are documented in this file. Release tags follow
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
-
-Removed the CI Dependency Graph snapshot job.
-
-- `advanced-security/component-detection-dependency-submission-action` hung until
-  the 15-minute job timeout and cancelled the whole workflow after a successful
-  1.0.13 release. GitHub's configured pip dependency-graph update remains.
-
 ## [1.0.14] - 2026-09-22
 
 Canonical repository is the [BatchLang organization](https://github.com/BatchLang/battest).
@@ -21,6 +13,13 @@ Canonical repository is the [BatchLang organization](https://github.com/BatchLan
 - GitHub Action consumers should use `BatchLang/battest@v1`.
 - Standalone `battest.exe` reports company BatchLang.
 - The batch-spec submodule URL is `https://github.com/BatchLang/batch-spec.git`.
+- PyPI classifiers include Python 3.15 so `pyproject-fmt` matches the CI image.
+
+Removed the CI Dependency Graph snapshot job.
+
+- `advanced-security/component-detection-dependency-submission-action` hung until
+  the 15-minute job timeout and cancelled the whole workflow after a successful
+  1.0.13 release. GitHub's configured pip dependency-graph update remains.
 
 ## [1.0.13] - 2026-08-31
 
