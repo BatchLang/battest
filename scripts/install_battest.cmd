@@ -138,7 +138,7 @@ if exist "%BATTEST_RELEASE_FILE%" (
         goto :end
     )
     if exist "%BATTEST_BIN%\battest.exe" (
-        echo Upgrading from !INSTALLED_RELEASE! to !BATTEST_VERSION!...
+        echo Upgrading from "!INSTALLED_RELEASE!" to !BATTEST_VERSION!...
         echo.
         set NEEDS_BACKUP=1
     )

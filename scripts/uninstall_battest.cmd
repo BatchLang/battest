@@ -63,7 +63,7 @@ if exist "%BATTEST_RELEASE_FILE%" (
         if /i not "!INSTALLED_RELEASE:~0,1!"=="v" set "INSTALLED_RELEASE="
     )
     if not "!INSTALLED_RELEASE!"=="" (
-        echo Installed release: !INSTALLED_RELEASE!
+        echo Installed release: "!INSTALLED_RELEASE!"
         echo.
     )
 )

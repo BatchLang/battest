@@ -14,6 +14,8 @@ Canonical repository is the [BatchLang organization](https://github.com/BatchLan
 - Standalone `battest.exe` reports company BatchLang.
 - The batch-spec submodule URL is `https://github.com/BatchLang/batch-spec.git`.
 - PyPI classifiers include Python 3.15 so `pyproject-fmt` matches the CI image.
+- Installer lint config disables E047 and W067, matching Blinter 1.1.31, and
+  quotes the release marker read from disk.
 
 Removed the CI Dependency Graph snapshot job.
 
