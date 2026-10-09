@@ -3,12 +3,12 @@ updates:
   - package-ecosystem: pip
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
   - package-ecosystem: cargo
     directory: /stub
     schedule:
-      interval: weekly
+      interval: monthly
